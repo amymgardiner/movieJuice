@@ -23,8 +23,23 @@ h1 {
 
 main {
     background-color: #FAF0CA;
+    min-height: 500px;
 }
 
-.review-card {
+.image
 
+.review-card {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    background-color: gray;
+    width: 30%;
+    margin-top: 50px;
+    min-height: 300px;
+}
+
+h2 {
+    background-color: #F95738;
+    width: 100%;
+    text-align: center;
 }
