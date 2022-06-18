@@ -14,7 +14,7 @@
 // https://imdb-api.com/en/API/SearchMovie/k_12345678/inception%202010
 
 // it also has an api for rotten tomatoes reviews
-https://imdb-api.com/en/API/MetacriticReviews/k_12345678/tt1375666
+// https://imdb-api.com/en/API/MetacriticReviews/k_12345678/tt1375666
 
 // Update dynamic elements using the data from the fetch
 
