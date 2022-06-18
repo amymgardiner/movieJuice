@@ -1,9 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
 header {
     background-color: #0D3B66;
     color: #F4D35E;
     width: 100%;
-    height: 100px;
+    height: 120px;
     padding-top: 10px;
+    width: -webkit-fill-available;
 }
 
 h1 {
@@ -27,8 +38,9 @@ h1 {
 
 main {
     background-color: #FAF0CA;
-    min-height: 500px;
+    height: 525px;
     padding-top: 5%;
+    width: -webkit-fill-available;
 }
 
 .movie-card {
@@ -91,6 +103,7 @@ footer {
     width: 100%;
     height: 100px;
     padding-top: 10px;
+    width: -webkit-fill-available;
 }
 
 .names {
@@ -106,11 +119,11 @@ h3 {
     width: 30%;
     background-color: #EE964B;
     padding-top: 5px;
-    padding-bottom: 10px;
     border-bottom: 5px solid #F4D35E;
 }
 
 .team-names {
     margin-top: 10px;
     font-size: 1.1rem;
+    background-color: #0D3B66;
 }
