@@ -35,30 +35,32 @@ main {
     color: #1F271B;
     display: flex;
     flex-direction: column;
-    border: solid black;
+    border: solid 3px #F95738;
+    border-radius: 5px;
     width: 96%;
     justify-content: center;
     margin-left: 2%;
 }
 
 .movie-title {
-    border: solid black;
+    border: solid 1px black;
+    text-align: center;
 }
 
 .content {
-    border: solid black;
+    border: solid 1px black;
     display: flex;
     justify-content: space-around;
 }
 
 .movie-img {
-    border: solid black;
+    border: solid 1px black;
     width: 55%;
     height: 55%;
 }
 
 .movie-info {
-    border: solid black;
+    border: solid 1px black;
     width: 35%;
 }
 
