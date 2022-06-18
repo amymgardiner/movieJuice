@@ -11,13 +11,18 @@ h1 {
 }
 
 .search {
-    border-radius: 2px;
+    border: solid #28AFB0 3px;
+    padding: 4.5px;
+    border-radius: 5px;
     background-color: #FAF0CA;
     margin: 20px 10px 0 0;
 }
 
 #button-addon3 {
     margin: 20px 0 0 0;
+    border: solid #28AFB0 3px;
+    border-radius: 5px;
+    padding: 5px;
 }
 
 main {
@@ -27,45 +32,44 @@ main {
 }
 
 .movie-card {
+    color: #1F271B;
     display: flex;
     flex-direction: column;
     border: solid black;
     width: 96%;
     justify-content: center;
     margin-left: 2%;
-
 }
 
 .movie-title {
     border: solid black;
-
 }
 
 .content {
     border: solid black;
     display: flex;
     justify-content: space-around;
-
 }
 
 .movie-img {
     border: solid black;
     width: 55%;
     height: 55%;
-
 }
 
 .movie-info {
     border: solid black;
     width: 35%;
-
 }
 
 .review-card {
+    color: #1F271B;
     display: flex;
     align-items: center;
     flex-direction: column;
-    background-color: gray;
+    background-color: #F4D35E;
+    border: solid 3px #28AFB0;
+    border-radius: 5px;
     width: 30%;
     margin-top: 50px;
     min-height: 300px;
@@ -73,6 +77,8 @@ main {
 
 h2 {
     background-color: #F95738;
+    color: #1F271B;
+    font-size: 1.2rem;
     width: 100%;
     text-align: center;
 }
@@ -85,12 +91,24 @@ footer {
     padding-top: 10px;
 }
 
+.names {
+    display: flex;
+    justify-content: center;
+}
+
 h3 {
+    border-radius: 10px;
+    border: 3px solid #28AFB0;
+    color: #19647E;
+    font-size: 1.2rem;
+    width: 30%;
+    background-color: #EE964B;
     padding-top: 5px;
     padding-bottom: 10px;
-    border-bottom: solid #F4D35E;
+    border-bottom: 5px solid #F4D35E;
 }
 
 .team-names {
     margin-top: 10px;
+    font-size: 1.1rem;
 }
