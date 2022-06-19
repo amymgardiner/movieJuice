@@ -1,39 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>movieJuice</title>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <div class="w-full flex flex-wrap items-center justify-around">
-            <div class="title flex items-center">
-                <h1>movieJuice</h1>
-            </div>
-            <div class="search-bar flex items-center">
-                <input class="search" type="search" placeholder="Type your movie here" aria-label="Search"
-                    aria-describedby="button-addon3">
-                <button type="button" id="button-addon3">Squeeze</button>
-            </div>
+      <div class="w-full flex flex-wrap items-center justify-around">
+        <div class="title flex items-center">
+          <h1>movieJuice</h1>
         </div>
-
+        <div class="search-bar flex items-center">
+          <input
+            class="search"
+            type="search"
+            placeholder="Type your movie here"
+            aria-label="Search"
+            aria-describedby="button-addon3"
+          />
+          <button type="button" id="button-addon3">Squeeze</button>
+        </div>
+      </div>
     </header>
 
     <main id="main-container">
-        <div class="intro-container mx-auto 2xl:w-1/3 w-3/4">
+      <div class="intro-container mx-auto 2xl:w-1/3 w-3/4">
             <h1 class="border-b-4 border-indigo-500 pb-4 text-6xl text-center font-bold">Welcome to MovieJuice</h1>
             <p class="text-2xl leading-loose text-center pb-10">Type a movie in the search box and hit that squeeze
                 button to find some juicy info on your searched movie. Information includes title, genre, cover art,
                 director, cast, and release date. It also displays reviews from Rotten Tomatoes, IMDb, and the New York
                 Times with review snippets. Find that perfect movie that juices you up.</p>
         </div>
-        <!-- <div class="movie-card">
+      <!-- <div class="img-container">
+        <h5 class="text-5xl text-center mb-8">Choose your movie</h5>
+        <div class="flex flex-row justify-around">
+          <div class="img-button-container cursor-pointer hover:-translate-y-2 hover:border-4">
+            <h5 class="text-center py-2 bg-zinc-400">Title of movie</h5>
+            <img
+              class="img-button w-56"
+              src="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1530&q=80"
+              alt=""
+              data-movie-id=""
+              data-movie-title=""
+            />
+            <h5 class="text-center py-2 bg-zinc-400">info</h5>
+          </div>
+        </div>
+      </div> -->
+      <!-- <div class="movie-card">
             <div class="movie-title">Title</div>
             <div class="content">
                 <div class="movie-img">img<img src="" alt=""></div>
@@ -73,16 +92,15 @@
     </main>
 
     <footer>
-        <div class="names">
-            <h3 class="text-center">Created by:</h3>
-        </div>
-        <div class="team-names w-full flex flex-wrap items-center justify-around">
-            <a href="https://github.com/amymgardiner">Amy Gardiner</a>
-            <a href="https://github.com/Zaphod1977">Bobby Bridges</a>
-            <a href="https://github.com/dmartino24">Dustin Martin</a>
-        </div>
+      <div class="names">
+        <h3 class="text-center">Created by:</h3>
+      </div>
+      <div class="team-names w-full flex flex-wrap items-center justify-around">
+        <a href="https://github.com/amymgardiner">Amy Gardiner</a>
+        <a href="https://github.com/Zaphod1977">Bobby Bridges</a>
+        <a href="https://github.com/dmartino24">Dustin Martin</a>
+      </div>
     </footer>
     <script src="./assets/js/script.js"></script>
-</body>
-
+  </body>
 </html>
