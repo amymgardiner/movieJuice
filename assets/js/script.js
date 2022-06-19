@@ -5,14 +5,13 @@ var mainContent = "";
 var imdbKey = "k_4old2p2l";
 var nyKey = "qahEBcpxGK8ZuOKPZA5GjnMtifJClbCm";
 
-
 // new var to deal with the fetches
 var isLoadingApi = false;
 
 // fetch data from the apis then call a function with that data inside to update the elements
 function fetchMovieId(movieName) {
   var imdbUrl = `https://imdb-api.com/en/API/SearchMovie/${imdbKey}/${movieName}`;
-
+  isLoadingApi = true;
   fetch(imdbUrl).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
@@ -36,6 +35,7 @@ function fetchMovieId(movieName) {
                     <h5 class="text-center py-2 bg-zinc-400">${movieInfo}</h5>
                   </div>`;
         }
+        isLoadingApi = false;
         mainContent += "</div></div>";
         mainElement.innerHTML = mainContent;
         console.log(data);
@@ -53,6 +53,7 @@ function fetchMovieId(movieName) {
 }
 // this will be removed
 function fetchNyTimes(movieName, movieId) {
+  isLoadingApi = true;
   var movieId = movieId;
   var nyUrl = `https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=${movieName}&api-key=${nyKey}`;
 
@@ -61,17 +62,17 @@ function fetchNyTimes(movieName, movieId) {
       response.json().then(function (data) {
         console.log(data);
         // will need to check if the name exists in the data results will loop through until movieName === result.title if it does not display no new york times info
-        
+
         for (var i = 0; i < data.results.length; i++) {
           // this will make sure we get the correct movie from ny api
-          console.log(data.results[i].display_title, movieName)
+          console.log(data.results[i].display_title, movieName);
           if (data.results[i].display_title === movieName) {
             author = data.results[i].byline;
             headline = data.results[i].headline;
-            nyReview  = data.results[i].summary_short;
+            nyReview = data.results[i].summary_short;
             nyUrlFullArticle = data.results[i].link.url;
             urlName = data.results[i].link.suggested_link_text;
-            
+
             fetchMovieInfo(movieId);
             // this will exit the loop and the function
             return;
@@ -124,6 +125,7 @@ function fetchReview(movieId) {
   fetch(imdbUrl).then(function (response) {
     if (response.ok) {
       response.json().then(function (data) {
+        isLoadingApi = false;
         var imdbRating = data.imDb;
         var rottenTomatoesRating = data.rottenTomatoes;
         var metacriticRating = data.metacritic;
@@ -177,8 +179,10 @@ function fetchReview(movieId) {
 
 // search click handler after click it does the fetch
 function searchClickHandler() {
-  var movieName = document.querySelector(".search").value.trim();
-  fetchMovieId(movieName);
+  if (!isLoadingApi) {
+    var movieName = document.querySelector(".search").value.trim();
+    fetchMovieId(movieName);
+  }
 }
 
 // event listener for search button that takes in searchClickHandler() function
