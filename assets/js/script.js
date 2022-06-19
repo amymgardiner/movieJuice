@@ -17,22 +17,22 @@ function fetchMovieId(movieName) {
       response.json().then(function (data) {
         mainContent = `<div class="img-container">
             <h5 class="text-5xl text-center mb-8">Choose your movie</h5>
-            <div class="flex flex-row justify-around">`;
+            <div class="flex flex-wrap wrap justify-evenly">`;
         for (var i = 0; i < data.results.length; i++) {
           var movieId = data.results[i].id;
           var movieName = data.results[i].title;
           var movieInfo = data.results[i].description;
           var movieImageSrc = data.results[i].image;
-          mainContent += `<div class="img-button-container cursor-pointer hover:-translate-y-2 hover:border-4">
-                    <h5 class="text-center py-2 bg-zinc-400">${movieName}</h5>
+          mainContent += `<div class="img-button-container border-2 black rounded-sm cursor-pointer hover:-translate-y-2 hover:border-4">
+                    <h5 class="text-center py-2 bg-zinc-400 w-40">${movieName}</h5>
                     <img
-                      class="img-button w-56"
+                      class="img-button w-40 h-60"
                       src="${movieImageSrc}"
                       alt=""
                       data-movie-id="${movieId}"
                       data-movie-title="${movieName}"
                     />
-                    <h5 class="text-center py-2 bg-zinc-400">${movieInfo}</h5>
+                    <h5 class="text-center py-2 bg-zinc-400 w-40">${movieInfo}</h5>
                   </div>`;
         }
         isLoadingApi = false;
@@ -106,11 +106,12 @@ function fetchMovieInfo(movieId) {
                     <div class="movie-img"><img src="${poster}" alt=""></div>
                     <div class="movie-info">
                     <ul>
-                        <li>${year}</li>
-                        <li>${genre}</li>
-                        <li>${director}</li>
-                        <li>${stars}</li>
-                        <li>${nyReview}</li></ul></div>
+                        <li>Year Produced: ${year}</li>
+                        <li>Genre: ${genre}</li>                        
+                        <li>Director: ${director}</li>                        
+                        <li>Featured Actors: ${stars}</li>
+                        <br></br>
+                        <li>Tidbit: ${nyReview}</li></ul></div>
                 </div>
             </div>`;
         fetchReview(movieId);
