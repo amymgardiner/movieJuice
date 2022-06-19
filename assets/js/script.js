@@ -4,12 +4,8 @@ var searchBtn = document.getElementById("button-addon3");
 var mainContent = "";
 var imdbKey = "k_4old2p2l";
 var nyKey = "qahEBcpxGK8ZuOKPZA5GjnMtifJClbCm";
-// new york times global vars
-var author;
-var headline;
-var nyReview = "";
-var myUrlFullArticle;
-var urlName;
+
+
 // new var to deal with the fetches
 var isLoadingApi = false;
 
@@ -55,6 +51,7 @@ function fetchMovieId(movieName) {
     }
   });
 }
+// this will be removed
 function fetchNyTimes(movieName, movieId) {
   var movieId = movieId;
   var nyUrl = `https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=${movieName}&api-key=${nyKey}`;
