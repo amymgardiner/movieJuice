@@ -6,6 +6,10 @@ This was a group project for a coding bootcamp, created by Bobby Bridges, Amy Ga
 
 Together we came up with the concept, style, and functionality of this application.
 
+To create work together as a group, we utilized GitHub, VS Code, Slack, and Zoom.
+
+Our application uses HTML, CSS, Tailwind CSS, JavaScript, and IMDb's API.
+
 ## User Story
 
 As a person interested in a movie, I want to easily look up key information about that movie including multiple ratings, so that I can decide whether or not this movie looks like a good pick for me to watch.
