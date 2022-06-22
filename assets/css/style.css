@@ -1,12 +1,17 @@
+/* universal selector */
 * {
     margin: 0;
     padding: 0;
     border: none;
 }
+
+/* body tag */
 body {
     margin: 0;
     padding: 0;
 }
+
+/* header sections */
 header {
     background-color: #0D3B66;
     background-size: cover;
@@ -15,18 +20,10 @@ header {
     height: 120px;
     padding: 17px 0 0 0;
 }
-
 #banner-title {
     font-size: 3rem;
     font-weight: 200;
 }
-
-#main-container {
-    /* background-color: aliceblue; */
-    block-size: fit-content;
-    padding-bottom: 25px;
-}
-
 .search {
     border: solid #FAF0CA 3px;
     padding: 4.5px;
@@ -42,11 +39,19 @@ header {
     border-radius: 5px;
     padding: 5px;
 }
+
+/* main body section in regular html */
+#main-container {
+    block-size: fit-content;
+    padding-bottom: 25px;
+}
 main {
     background-color: #FAF0CA;
-    height: 620px;
+    min-height: calc(100vh - 120px - 100px);
     padding-top: 5%;
 }
+
+/* dynamic html from javascript - uploads movie name, year, genre, etc. after movie is selected */
 .movie-card {
     color: #1F271B;
     display: flex;
@@ -70,7 +75,6 @@ main {
     justify-content: space-evenly;
 }
 .movie-img {
-    /* border: solid 1px black; */
     width: 20%;
     height: 55%;
     display: flex;
@@ -90,6 +94,8 @@ img {
     line-height: 1.7em;
     font-weight: 500;
 }
+
+/* dynamic html from javascript - directly under movie card html on same page after movie is selected */
 .review-card {
     color: #1F271B;
     display: flex;
@@ -110,8 +116,9 @@ h2 {
     border: solid black 2px;
     margin: -1em;
     border-radius: 3em;
-    /* margin-top: .15em; */
 }
+
+/* footer sections */
 footer {
     background-color: #0D3B66;
     background-size: cover;
@@ -124,22 +131,18 @@ footer {
     display: flex;
     justify-content: center;
 }
-a {
-    font-weight: 700;
-}
 h3 {
     border-radius: 10px;
-    /* border: 3px solid #28AFB0; */
-    /* color: #19647E; */
     color: white;
     font-size: 1.2rem;
     width: 30%;
-    /* background-color: #EE964B; */
     padding-top: 5px;
-    /* border-bottom: 5px solid #F4D35E; */
 }
 .team-names {
     margin-top: 10px;
     font-size: 1.1rem;
     background-color: #0D3B66;
+}
+a {
+    font-weight: 700;
 }
