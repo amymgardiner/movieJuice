@@ -57,7 +57,7 @@ function fetchMovieId(movieName) {
       });
     })
     .catch((err) => {
-      displayErrorModal();
+      displayErrorModal(err);
     });
 }
 
@@ -76,7 +76,7 @@ function fetchGiphy(movieName, movieId) {
       fetchMovieInfo(movieId);
     })
     .catch((err) => {
-      displayErrorModal();
+      displayErrorModal(err);
     });
 }
 
@@ -114,7 +114,7 @@ function fetchMovieInfo(movieId) {
       fetchReview(movieId);
     })
     .catch((err) => {
-      displayErrorModal();
+      displayErrorModal(err);
     });
 }
 
@@ -158,15 +158,15 @@ function fetchReview(movieId) {
       mainElement.innerHTML = mainContent;
     })
     .catch((err) => {
-      displayErrorModal();
+      displayErrorModal(err);
     });
 }
 
 // when an error is captured from one of the fetch calls
-function displayErrorModal() {
+function displayErrorModal(err) {
   mainElement.innerHTML = `<div id="modal" class="relative p-4 w-96 mx-auto shadow-xl rounded-md">
   <div class="text-center">
-      <h4 class="text-lg font-medium text-orange-600">Movie Not Found</h4>
+      <h4 class="text-lg font-medium text-orange-600">Error has occured on server side. Try again later.</h4>
       <div class="p-4">
           <p class="text-sm text-black-500">
               Click ok button to close and search for another movie

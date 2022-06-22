@@ -108,6 +108,7 @@ img {
 .review-card {
     color: #1F271B;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     flex-direction: column;
     background-color: #F4D35E;
@@ -181,6 +182,14 @@ footer {
 
     main {
         min-height: calc(100vh - 160px - 100px);
+    }
+
+    .review {
+        flex-direction: column;
+    }
+
+    .review-card {
+        width: 50%;
     }
 }
 
