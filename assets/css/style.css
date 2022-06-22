@@ -15,25 +15,30 @@ header {
     height: 120px;
     padding: 17px 0 0 0;
 }
-h1 {
+
+#banner-title {
     font-size: 3rem;
     font-weight: 200;
 }
+
 #main-container {
     /* background-color: aliceblue; */
     block-size: fit-content;
     padding-bottom: 25px;
 }
+
 .search {
-    border: solid #28AFB0 3px;
+    border: solid #FAF0CA 3px;
     padding: 4.5px;
     border-radius: 5px;
     background-color: #FAF0CA;
     margin: 20px 10px 0 0;
+    color: black;
 }
+
 #button-addon3 {
     margin: 20px 0 0 0;
-    border: solid #28AFB0 3px;
+    border: solid #FAF0CA 1.5px;
     border-radius: 5px;
     padding: 5px;
 }
@@ -60,13 +65,13 @@ main {
     margin: 15px 0 20px 0;
 }
 .content {
-    /* border: solid 1px black; */
+    border: none;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 .movie-img {
     /* border: solid 1px black; */
-    width: 55%;
+    width: 20%;
     height: 55%;
     display: flex;
     justify-content: center;
