@@ -3,7 +3,7 @@ var mainElement = document.getElementById("main-container");
 var searchBtn = document.getElementById("button-addon3");
 var inputElement = document.getElementById("search-input");
 var mainContent = "";
-var imdbKey = "k_fuxd4gjq";
+var imdbKey = "k_4old2p2l";
 var giphyKey = "nxvenzenl4mKAFjuGsTFLvNKZsecjEcP";
 var giphySrc;
 var isLoadingApi = false;

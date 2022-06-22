@@ -40,4 +40,4 @@ THEN their names and GitHub account links are at the very bottom of the page.
 
 https://amymgardiner.github.io/movieJuice/
 
-![plot](./assets/images/Screenshot%202022-06-21%20200934.png)
+![plot](<./assets/images/amymgardiner.github.io_movieJuice_%20(1).png>)
