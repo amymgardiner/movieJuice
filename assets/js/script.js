@@ -1,29 +1,38 @@
 // global vars
 var mainElement = document.getElementById("main-container");
 var searchBtn = document.getElementById("button-addon3");
+var inputElement = document.getElementById("search-input");
 var mainContent = "";
 var imdbKey = "k_4old2p2l";
-var nyKey = "qahEBcpxGK8ZuOKPZA5GjnMtifJClbCm";
-
-// new var to deal with the fetches
+var giphyKey = "nxvenzenl4mKAFjuGsTFLvNKZsecjEcP";
+var giphySrc;
 var isLoadingApi = false;
 
-// fetch data from the apis then call a function with that data inside to update the elements
+// gets the last searched term from local storage
+function loadPage() {
+  var lastSearch = localStorage.getItem("lastSearch");
+  if (lastSearch) {
+    inputElement.value = lastSearch;
+    inputElement.placeholder = lastSearch;
+  }
+}
+// fetch movie id to get the imdb id
 function fetchMovieId(movieName) {
+  localStorage.setItem("lastSearch", movieName);
   var imdbUrl = `https://imdb-api.com/en/API/SearchMovie/${imdbKey}/${movieName}`;
   isLoadingApi = true;
-  fetch(imdbUrl).then(function (response) {
-    if (response.ok) {
-      response.json().then(function (data) {
-        mainContent = `<div class="img-container">
+  fetch(imdbUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      mainContent = `<div class="img-container">
             <h5 class="text-5xl text-center mb-8">Choose your movie</h5>
             <div class="flex flex-row justify-around">`;
-        for (var i = 0; i < data.results.length; i++) {
-          var movieId = data.results[i].id;
-          var movieName = data.results[i].title;
-          var movieInfo = data.results[i].description;
-          var movieImageSrc = data.results[i].image;
-          mainContent += `<div class="img-button-container cursor-pointer hover:-translate-y-2 hover:border-4">
+      for (var i = 0; i < data.results.length; i++) {
+        var movieId = data.results[i].id;
+        var movieName = data.results[i].title;
+        var movieInfo = data.results[i].description;
+        var movieImageSrc = data.results[i].image;
+        mainContent += `<div class="img-button-container cursor-pointer hover:-translate-y-2 hover:border-4">
                     <h5 class="text-center py-2 bg-zinc-400">${movieName}</h5>
                     <img
                       class="img-button w-56"
@@ -34,73 +43,62 @@ function fetchMovieId(movieName) {
                     />
                     <h5 class="text-center py-2 bg-zinc-400">${movieInfo}</h5>
                   </div>`;
-        }
-        isLoadingApi = false;
-        mainContent += "</div></div>";
-        mainElement.innerHTML = mainContent;
-        console.log(data);
-        var imgElements = document.querySelectorAll(".img-button");
-        imgElements.forEach((imgButton) => {
-          imgButton.addEventListener("click", function handleClick(event) {
-            var movieId = event.target.getAttribute("data-movie-id");
-            var movieName = event.target.getAttribute("data-movie-title");
-            fetchNyTimes(movieName, movieId);
-          });
+      }
+      isLoadingApi = false;
+      mainContent += "</div></div>";
+      mainElement.innerHTML = mainContent;
+      console.log(data);
+      var imgElements = document.querySelectorAll(".img-button");
+      imgElements.forEach((imgButton) => {
+        imgButton.addEventListener("click", function handleClick(event) {
+          var movieId = event.target.getAttribute("data-movie-id");
+          var movieName = event.target.getAttribute("data-movie-title");
+          // next function call to get the correct gif
+          fetchGiphy(movieName, movieId);
         });
       });
-    }
-  });
+    })
+    .catch((err) => {
+      displayErrorModal();
+    });
 }
-// this will be removed
-function fetchNyTimes(movieName, movieId) {
+
+// fetch a gif corresponding with movieName
+function fetchGiphy(movieName, movieId) {
   isLoadingApi = true;
   var movieId = movieId;
-  var nyUrl = `https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=${movieName}&api-key=${nyKey}`;
+  var giphyUrl = `https://api.giphy.com/v1/gifs/search?api_key=${giphyKey}&q=${movieName}&limit=1&offset=0&rating=g&lang=en`;
 
-  fetch(nyUrl).then(function (response) {
-    if (response.ok) {
-      response.json().then(function (data) {
-        console.log(data);
-        // will need to check if the name exists in the data results will loop through until movieName === result.title if it does not display no new york times info
-
-        for (var i = 0; i < data.results.length; i++) {
-          // this will make sure we get the correct movie from ny api
-          console.log(data.results[i].display_title, movieName);
-          if (data.results[i].display_title === movieName) {
-            author = data.results[i].byline;
-            headline = data.results[i].headline;
-            nyReview = data.results[i].summary_short;
-            nyUrlFullArticle = data.results[i].link.url;
-            urlName = data.results[i].link.suggested_link_text;
-
-            fetchMovieInfo(movieId);
-            // this will exit the loop and the function
-            return;
-          }
-        }
-        fetchMovieInfo(movieId);
-      });
-    }
-  });
+  fetch(giphyUrl)
+    .then((response) => response.json())
+    .then((content) => {
+      console.log(content);
+      giphySrc = content.data[0].images.downsized.url;
+      //giphyAlt = content.data[0].title;
+      fetchMovieInfo(movieId);
+    })
+    .catch((err) => {
+      displayErrorModal();
+    });
 }
-
+// fetch the basic info of movie from the imdb id
 function fetchMovieInfo(movieId) {
   var imdbUrl = `https://imdb-api.com/en/API/Title/${imdbKey}/${movieId}`;
 
-  fetch(imdbUrl).then(function (response) {
-    if (response.ok) {
-      response.json().then(function (data) {
-        var title = data.title;
-        var genre = data.genres;
-        var poster = data.image;
-        var director = data.directors;
-        var stars = data.stars;
-        var year = data.year;
+  fetch(imdbUrl)
+    .then((response) => response.json())
+    .then((data) => {
+      var title = data.title;
+      var genre = data.genres;
+      var poster = data.image;
+      var director = data.directors;
+      var stars = data.stars;
+      var year = data.year;
 
-        console.log(data);
+      console.log(data);
 
-        mainContent = "";
-        mainContent = `<div class="movie-card">
+      mainContent = "";
+      mainContent = `<div class="movie-card">
                 <div class="movie-title">${title}</div>
                 <div class="content">
                     <div class="movie-img"><img src="${poster}" alt=""></div>
@@ -110,21 +108,21 @@ function fetchMovieInfo(movieId) {
                         <li>${genre}</li>
                         <li>${director}</li>
                         <li>${stars}</li>
-                        <li>${nyReview}</li></ul></div>
+                        <li>A gif from your movie search:<img src="${giphySrc}" alt=""></li></ul></div>
                 </div>
             </div>`;
-        fetchReview(movieId);
-      });
-    }
-  });
+      fetchReview(movieId);
+    })
+    .catch((err) => {
+      displayErrorModal();
+    });
 }
-
+// fetches ratings from the imdb id
 function fetchReview(movieId) {
   var imdbUrl = `https://imdb-api.com/en/API/Ratings/${imdbKey}/${movieId}`;
 
-  fetch(imdbUrl).then(function (response) {
-    if (response.ok) {
-      response.json().then(function (data) {
+  fetch(imdbUrl).then((response) => response.json())
+  .then((data) => {
         isLoadingApi = false;
         var imdbRating = data.imDb;
         var rottenTomatoesRating = data.rottenTomatoes;
@@ -158,26 +156,44 @@ function fetchReview(movieId) {
             </div>`;
 
         mainElement.innerHTML = mainContent;
+      })
+      .catch((err) => {
+        displayErrorModal();
       });
-    }
+}
+// when an error is captured from one of the fetch calls
+function displayErrorModal() {
+  mainElement.innerHTML = `<div id="modal" class="relative p-4 w-96 mx-auto shadow-lg rounded-md">
+  <div class="text-center">
+      <h4 class="text-lg font-medium text-red-500">Movie Not Found</h4>
+      <div class="p-4">
+          <p class="text-sm text-black-500">
+              Click ok button to close and search for another movie
+          </p>
+      </div>
+      <div class="items-center px-24 py-5">
+          <button
+              id="close-btn"
+              class="px-4 py-2 text-white rounded-full bg-green-500  text-base font-medium w-full hover:bg-green-600 focus:ring-green-300"
+          >
+              OK
+          </button>
+      </div>
+  </div>
+</div>`;
+  closeButton = document.getElementById("close-btn");
+  closeButton.addEventListener("click", function closeButtonHandler() {
+    mainElement.innerHTML = `<div class="intro-container mx-auto 2xl:w-1/3 w-3/4">
+    <h1 class="border-b-4 border-indigo-500 pb-4 text-6xl text-center font-bold">Welcome to MovieJuice</h1>
+    <p class="text-2xl leading-loose text-center pb-10">Type a movie in the search box and hit that squeeze
+        button to find some juicy info on your searched movie. Information includes title, genre, cover art,
+        director, cast, and release date. It also displays reviews from Rotten Tomatoes, IMDb, and the New York
+        Times with review snippets. Find that perfect movie that juices you up.</p>
+</div>`;
+    isLoadingApi = false;
   });
 }
-
-// new york times api
-// Site https://developer.nytimes.com/docs/movie-reviews-api/1/overview
-// EXAMPLE https://api.nytimes.com/svc/movies/v2/reviews/search.json?query=godfather&api-key=yourkey
-
-// imdb api
-// this one is where will get all the data for actors/directors/genre/title ect...
-// Site https://imdb-api.com/
-// https://imdb-api.com/en/API/SearchMovie/k_12345678/inception%202010
-
-// it also has an api for rotten tomatoes reviews
-// https://imdb-api.com/en/API/MetacriticReviews/k_12345678/tt1375666
-
-// Update dynamic elements using the data from the fetch
-
-// search click handler after click it does the fetch
+// search button is pressed
 function searchClickHandler() {
   if (!isLoadingApi) {
     var movieName = document.querySelector(".search").value.trim();
@@ -185,5 +201,8 @@ function searchClickHandler() {
   }
 }
 
+
 // event listener for search button that takes in searchClickHandler() function
 searchBtn.addEventListener("click", searchClickHandler);
+// loads the page for the first time
+loadPage();
