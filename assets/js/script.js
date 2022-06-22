@@ -205,5 +205,10 @@ function searchClickHandler() {
 
 // event listener for search button that takes in searchClickHandler() function
 searchBtn.addEventListener("click", searchClickHandler);
+inputElement.addEventListener("keypress", function(event){
+  if(event.key === "Enter"){
+    searchClickHandler();
+  }
+});
 // loads the page for the first time
 loadPage();
