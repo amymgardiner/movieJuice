@@ -52,6 +52,10 @@ main {
 }
 
 /* dynamic html from javascript - uploads list of movies to select from */
+.img-button-container {
+    padding: 5px;
+}
+
 .img-container h5 {
     color:#1F271B;
 }
@@ -162,7 +166,6 @@ footer {
 @media screen and (max-width: 1024px) {
     .img-button-container {
         display: flex;
-        padding: 5px;
     }
 }
 
@@ -171,7 +174,6 @@ footer {
         display: flex;
         flex-wrap: wrap;
         flex-direction: column;
-        padding: 5px;
     }
 }
 
