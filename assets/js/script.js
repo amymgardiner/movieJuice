@@ -164,9 +164,9 @@ function fetchReview(movieId) {
 
 // when an error is captured from one of the fetch calls
 function displayErrorModal() {
-  mainElement.innerHTML = `<div id="modal" class="relative p-4 w-96 mx-auto shadow-lg rounded-md">
+  mainElement.innerHTML = `<div id="modal" class="relative p-4 w-96 mx-auto shadow-xl rounded-md">
   <div class="text-center">
-      <h4 class="text-lg font-medium text-red-500">Movie Not Found</h4>
+      <h4 class="text-lg font-medium text-orange-600">Movie Not Found</h4>
       <div class="p-4">
           <p class="text-sm text-black-500">
               Click ok button to close and search for another movie
@@ -174,7 +174,7 @@ function displayErrorModal() {
       </div>
       <div class="items-center px-24 py-5">
           <button id="close-btn"
-          class="px-4 py-2 text-white rounded-full bg-green-500  text-base font-medium w-full hover:bg-green-600 focus:ring-green-300">
+          class="px-4 py-2 text-white rounded-full bg-sky-600 text-base font-medium w-full hover:bg-sky-800 focus:ring-green-300">
               OK
           </button>
       </div>
@@ -189,7 +189,7 @@ function displayErrorModal() {
     Type a movie in the search box and hit that squeeze button to find some juicy info on your searched
     movie. Information includes title, genre, cover art, release year, director, cast, and a fun gif!
     What's more, it also displays ratings from five sources so you can better compare if the movie is made
-    with lemons or lemonade. Find that perfect movie that juices you up!.</p>
+    with lemons or lemonade. Find that perfect movie that juices you up!</p>
 </div>`;
     isLoadingApi = false;
   });
