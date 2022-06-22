@@ -25,7 +25,7 @@ header {
     font-weight: 200;
 }
 .search {
-    border: solid #FAF0CA 3px;
+    border: solid white 3px;
     padding: 4.5px;
     border-radius: 5px;
     background-color: #FAF0CA;
@@ -35,7 +35,7 @@ header {
 
 #button-addon3 {
     margin: 20px 0 0 0;
-    border: solid #FAF0CA 1.5px;
+    border: solid white 1.5px;
     border-radius: 5px;
     padding: 5px;
 }
@@ -49,6 +49,15 @@ main {
     background-color: #FAF0CA;
     min-height: calc(100vh - 120px - 100px);
     padding-top: 5%;
+}
+
+/* dynamic html from javascript - uploads list of movies to select from */
+.img-container h5 {
+    color:#1F271B;
+}
+
+.img-button-container h5 {
+    color:#1F271B;
 }
 
 /* dynamic html from javascript - uploads movie name, year, genre, etc. after movie is selected */

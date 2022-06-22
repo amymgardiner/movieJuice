@@ -35,10 +35,10 @@ function fetchMovieId(movieName) {
         var movieName = data.results[i].title;
         var movieInfo = data.results[i].description;
         var movieImageSrc = data.results[i].image;
-        mainContent += `<div class="img-button-container border-2 black rounded-sm cursor-pointer hover:-translate-y-2 hover:border-4">
-            <h5 class="text-center py-2 bg-zinc-400 w-40">${movieName}</h5>
+        mainContent += `<div class="img-button-container cursor-pointer hover:-translate-y-2">
+            <h5 class="text-center py-2 bg-orange-300 w-40">${movieName}</h5>
             <img class="img-button w-40 h-60" src="${movieImageSrc}" alt="" data-movie-id="${movieId}" data-movie-title="${movieName}"/>
-            <h5 class="text-center py-2 bg-zinc-400 w-40">${movieInfo}</h5>
+            <h5 class="text-center py-2 bg-orange-300 w-40">${movieInfo}</h5>
                       </div>`;
       }
 
