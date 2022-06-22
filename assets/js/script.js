@@ -3,12 +3,12 @@ var mainElement = document.getElementById("main-container");
 var searchBtn = document.getElementById("button-addon3");
 var inputElement = document.getElementById("search-input");
 var mainContent = "";
-var imdbKey = "k_fuxd4gjq";
+var imdbKey = "k_4old2p2l";
 var giphyKey = "nxvenzenl4mKAFjuGsTFLvNKZsecjEcP";
 var giphySrc;
 var isLoadingApi = false;
 
-// gets the last searched term from local storage
+// gets the last searched term from local storage and displays in search bar
 function loadPage() {
   var lastSearch = localStorage.getItem("lastSearch");
   if (lastSearch) {
@@ -16,11 +16,14 @@ function loadPage() {
     inputElement.placeholder = lastSearch;
   }
 }
-// fetch movie id to get the imdb id
+
+// fetch movie movie name to get the imdb movie id
 function fetchMovieId(movieName) {
   localStorage.setItem("lastSearch", movieName);
+
   var imdbUrl = `https://imdb-api.com/en/API/SearchMovie/${imdbKey}/${movieName}`;
   isLoadingApi = true;
+  // from searched movie name, display list of movies matching that name from imdb
   fetch(imdbUrl)
     .then((response) => response.json())
     .then((data) => {
@@ -33,27 +36,22 @@ function fetchMovieId(movieName) {
         var movieInfo = data.results[i].description;
         var movieImageSrc = data.results[i].image;
         mainContent += `<div class="img-button-container border-2 black rounded-sm cursor-pointer hover:-translate-y-2 hover:border-4">
-        <h5 class="text-center py-2 bg-zinc-400 w-40">${movieName}</h5>
-                    <img
-                      class="img-button w-40 h-60"
-                      src="${movieImageSrc}"
-                      alt=""
-                      data-movie-id="${movieId}"
-                      data-movie-title="${movieName}"
-                    />
-                    <h5 class="text-center py-2 bg-zinc-400 w-40">${movieInfo}</h5>
-                  </div>`;
+            <h5 class="text-center py-2 bg-zinc-400 w-40">${movieName}</h5>
+            <img class="img-button w-40 h-60" src="${movieImageSrc}" alt="" data-movie-id="${movieId}" data-movie-title="${movieName}"/>
+            <h5 class="text-center py-2 bg-zinc-400 w-40">${movieInfo}</h5>
+                      </div>`;
       }
+
       isLoadingApi = false;
       mainContent += "</div></div>";
       mainElement.innerHTML = mainContent;
-      console.log(data);
+      // function to select movie from list of movies showing on page
       var imgElements = document.querySelectorAll(".img-button");
       imgElements.forEach((imgButton) => {
         imgButton.addEventListener("click", function handleClick(event) {
           var movieId = event.target.getAttribute("data-movie-id");
           var movieName = event.target.getAttribute("data-movie-title");
-          // next function call to get the correct gif
+          // next function call to get the gif associated with the movie name
           fetchGiphy(movieName, movieId);
         });
       });
@@ -81,10 +79,12 @@ function fetchGiphy(movieName, movieId) {
       displayErrorModal();
     });
 }
-// fetch the basic info of movie from the imdb id
+
+// fetch the basic info of movie from the imdb movie id
 function fetchMovieInfo(movieId) {
   var imdbUrl = `https://imdb-api.com/en/API/Title/${imdbKey}/${movieId}`;
 
+  // display movie info with dynmaic html
   fetch(imdbUrl)
     .then((response) => response.json())
     .then((data) => {
@@ -94,8 +94,6 @@ function fetchMovieInfo(movieId) {
       var director = data.directors;
       var stars = data.stars;
       var year = data.year;
-
-      console.log(data);
 
       mainContent = "";
       mainContent = `<div class="movie-card">
@@ -109,16 +107,18 @@ function fetchMovieInfo(movieId) {
                     <li>Director: ${director}</li>                        
                     <li>Featured Actors: ${stars}</li>
                     <br></br>
-                        <li>A gif from your movie search:<img src="${giphySrc}" alt=""></li></ul></div>
+                    <li>A gif from your movie search:<img src="${giphySrc}" alt=""></li>
+                    </ul></div>
                 </div>
-            </div>`;
+                </div>`;
       fetchReview(movieId);
     })
     .catch((err) => {
       displayErrorModal();
     });
 }
-// fetches ratings from the imdb id
+
+// fetches ratings from the imdb id and display below the movie info
 function fetchReview(movieId) {
   var imdbUrl = `https://imdb-api.com/en/API/Ratings/${imdbKey}/${movieId}`;
 
@@ -131,8 +131,6 @@ function fetchReview(movieId) {
       var metacriticRating = data.metacritic;
       var moviedbRating = data.theMovieDb;
       var filmAffinityRating = data.filmAffinity;
-
-      console.log(data);
 
       mainContent += `<div class="review w-full flex flex-wrap items-center justify-around">
                 <div class="review-card flex">
@@ -163,6 +161,7 @@ function fetchReview(movieId) {
       displayErrorModal();
     });
 }
+
 // when an error is captured from one of the fetch calls
 function displayErrorModal() {
   mainElement.innerHTML = `<div id="modal" class="relative p-4 w-96 mx-auto shadow-lg rounded-md">
@@ -174,27 +173,28 @@ function displayErrorModal() {
           </p>
       </div>
       <div class="items-center px-24 py-5">
-          <button
-              id="close-btn"
-              class="px-4 py-2 text-white rounded-full bg-green-500  text-base font-medium w-full hover:bg-green-600 focus:ring-green-300"
-          >
+          <button id="close-btn"
+          class="px-4 py-2 text-white rounded-full bg-green-500  text-base font-medium w-full hover:bg-green-600 focus:ring-green-300">
               OK
           </button>
       </div>
   </div>
-</div>`;
+  </div>`;
   closeButton = document.getElementById("close-btn");
   closeButton.addEventListener("click", function closeButtonHandler() {
     mainElement.innerHTML = `<div class="intro-container mx-auto 2xl:w-1/3 w-3/4">
-    <h1 class="border-b-4 border-indigo-500 pb-4 text-6xl text-center font-bold">Welcome to MovieJuice</h1>
-    <p class="text-2xl leading-loose text-center pb-10">Type a movie in the search box and hit that squeeze
-        button to find some juicy info on your searched movie. Information includes title, genre, cover art,
-        director, cast, and release date. It also displays reviews from Rotten Tomatoes, IMDb, and the New York
-        Times with review snippets. Find that perfect movie that juices you up.</p>
+    <h1 class="border-b-4 border-blue-900 pb-4 text-6xl text-center font-bold">Welcome to movieJuice</h1>
+    <p class="text-2xl leading-loose text-center pb-10">Quench your curiosity with a refreshing glass of
+    movieJuice! <br>
+    Type a movie in the search box and hit that squeeze button to find some juicy info on your searched
+    movie. Information includes title, genre, cover art, release year, director, cast, and a fun gif!
+    What's more, it also displays ratings from five sources so you can better compare if the movie is made
+    with lemons or lemonade. Find that perfect movie that juices you up!.</p>
 </div>`;
     isLoadingApi = false;
   });
 }
+
 // search button is pressed
 function searchClickHandler() {
   if (!isLoadingApi) {
@@ -210,5 +210,6 @@ inputElement.addEventListener("keypress", function(event){
     searchClickHandler();
   }
 });
+
 // loads the page for the first time
 loadPage();
